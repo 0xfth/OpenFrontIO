@@ -208,15 +208,11 @@ export function getMode(list: Set<number>): number {
 }
 
 export function sanitize(name: string): string {
-  let result = name.replace(/[^\p{L}\p{N}\s\p{Emoji}\[\]_]/gu, "");
-
-  // 2. THEN, remove emoji components using explicit Unicode ranges.
-  result = result.replace(
-    /[\u{1F3FB}-\u{1F3FF}\u{FE00}-\u{FE0F}\u{E0020}-\u{E007F}]+/gu,
+  return name.replace(
+    /[^\p{L}\p{N}\s\p{Emoji}\[\]_\u{1F3FB}-\u{1F3FF}\u{FE00}-\u{FE0F}\u{E0020}-\u{E007F}]/gu,
     "",
   );
 
-  return result;
   //return name.replace(/[^\p{L}\p{N}\s\p{Emoji}\p{Emoji_Component}\[\]_]/gu, "");
 }
 
